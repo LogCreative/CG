@@ -6,8 +6,12 @@ class IncrPoly {
     float b;
     float c;
 
+    static int floor(float y) {
+        return y >= 0.0f ? (int) y : (int) y - 1;
+    }
+
     static int round(float y) {
-        return (int) floor(y + 0.5);
+        return floor(y + 0.5f);
     }
 
 public:
