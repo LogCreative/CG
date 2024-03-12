@@ -21,8 +21,14 @@ public:
         float value = 0;
         if (order == 0) return coeff;
         if (order == 1) {
-            for (int i = 0; i < base; ++i) {
-                value += coeff;
+            if (base >= 0) {
+                for (int i = 0; i < base; ++i) {
+                    value += coeff;
+                }
+            } else {
+                for (int i = 0; i < -base; ++i) {
+                    value -= coeff;
+                }
             }
             return value;
         }

@@ -18,7 +18,7 @@ TEST(IncrPolyTest, TestGetValue) {
 TEST(IncrPolyTest, TestGetRange) {
     float a = 1.2, b = 3.4, c = 5.6;
     IncrPoly poly(a, b, c);
-    int x_b = 0, x_e = 500;
+    int x_b = -100, x_e = 500;
     int* y = new int[x_e - x_b + 1];
     poly.getRangeValue(x_b, x_e, y);
     int* yptr = y;
