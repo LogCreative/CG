@@ -6,6 +6,14 @@
 
 int main()
 {
+    float a, b, c;
+    int x_b, x_e;
+    prepare_input(a, b, c, x_b, x_e);
+    IncrPoly poly(a, b,c);
+    int length = x_e - x_b + 1;
+    int* y = new int[length];
+    poly.getRangeValue(x_b, x_e, y);
+
     /* Initialize the library */
     if (!glfwInit()) {
         return -1;
@@ -39,14 +47,6 @@ int main()
 
     Shader ourShader("shader/vertexShader.glsl", "shader/fragmentShader.glsl");
     ourShader.use();
-
-    float a, b, c;
-    int x_b, x_e;
-    prepare_input(a, b, c, x_b, x_e);
-    IncrPoly poly(a, b,c);
-    int length = x_e - x_b + 1;
-    int* y = new int[length];
-    poly.getRangeValue(x_b, x_e, y);
 
     int coordLength = length + length;
     int* vertices = new int[coordLength];
