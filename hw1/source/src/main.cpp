@@ -18,7 +18,7 @@ int main()
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 #endif
-    GLFWwindow* window = glfwCreateWindow(1280, 720, "Incremental algorithm for parabola", nullptr, nullptr);
+    GLFWwindow* window = glfwCreateWindow(800, 600, "Incremental algorithm for parabola", nullptr, nullptr);
     if (!window) {
         glfwTerminate();
         return -1;
@@ -70,7 +70,7 @@ int main()
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window)) {
 
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+        glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
         ourShader.use();
