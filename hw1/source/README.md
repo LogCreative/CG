@@ -3,7 +3,7 @@
 本源代码需要使用 [CMake](https://cmake.org) 编译，推荐使用 CLion 集成环境。
 
 编译方式：
-```
+```bash
 mkdir cmake-build
 cd cmake-build
 cmake ..

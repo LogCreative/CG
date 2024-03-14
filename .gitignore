@@ -12,3 +12,5 @@
 *.bcf
 *.blg
 *.run.xml
+*.markdown.lua
+_markdown_*

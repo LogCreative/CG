@@ -3,10 +3,11 @@
 示例输入：
 
 ```
-Incremental algorithm for calculating a*x^2+b*x+c within range [x_b,x_e].
-Please input the coefficients (could be decimals); split by whitespace and hit Enter [a b c]: -0.05 5 10
-Please input the range boundaries (make sure they are integers); split by whitespace and hit Enter [x_b x_e]: -100 200
+[a b c]: -0.05 5 10
+[x_b x_e]: -100 200
 ```
+
+注意，需要保证文件夹 `assets/` 存在于运行文件夹中。
 
 ## Windows
 

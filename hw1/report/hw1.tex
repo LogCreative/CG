@@ -1,5 +1,8 @@
 \documentclass[math-font=newcm]{sjtuarticle}
 
+\usepackage{enumitem}
+\usepackage[hybrid,citations,fencedCode,underscores=false]{markdown}
+
 \usepackage[style=gb7714-2015]{biblatex}
 \addbibresource{ref.bib}
 
@@ -128,12 +131,7 @@ Design an incremental algorithm for the given polynomial:
     \caption{命令行程序输出结果}\label{fig:cli}
 \end{figure}
 
-运行命令行程序，如图 \ref{fig:cli} 所示。
-\begin{itemize}
-    \item 首先输入三个参数（用空格分隔），比如 \verb"-0.05 5 10"，按下回车；
-    \item 接着输入左右边界（用空格分隔，如果输入不是整数，将会转换为整数），比如 \verb"-30 130"，按下回车；
-    \item 最后就会输出这个区间之间纵坐标的整数结果。
-\end{itemize}
+运行命令行程序，如图 \ref{fig:cli} 所示。首先输入三个参数（用空格分隔），比如 \verb"-0.05 5 10"，按下回车；接着输入左右边界（用空格分隔，如果输入不是整数，将会转换为整数），比如 \verb"-30 130"，按下回车；最后就会输出这个区间之间纵坐标的整数结果。
 
 \subsection{代码实现}
 
@@ -166,10 +164,18 @@ Design an incremental algorithm for the given polynomial:
 
 \code{../source/src/main.cpp}{c++}
 
-\code{../source/shader/vertexShader.glsl}{c}
+\code{../source/assets/shader/vertexShader.glsl}{c}
 
-\code{../source/shader/fragmentShader.glsl}{c}
+\code{../source/assets/shader/fragmentShader.glsl}{c}
 
 \printbibliography[heading=bibintoc]
+
+\appendix
+
+\lstset{basicstyle={\ttfamily\small}}
+
+\markdownInput{../executable/README.md}
+
+\markdownInput{../source/README.md}
 
 \end{document}
