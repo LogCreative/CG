@@ -45,7 +45,7 @@ int main()
     int w, h;
     glfwGetWindowSize(window, &w, &h);
 
-    Shader ourShader("shader/vertexShader.glsl", "shader/fragmentShader.glsl");
+    Shader ourShader("assets/shader/vertexShader.glsl", "assets/shader/fragmentShader.glsl");
     ourShader.use();
 
     int coordLength = length + length;
