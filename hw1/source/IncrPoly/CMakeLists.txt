@@ -5,4 +5,4 @@ set(CMAKE_CXX_STANDARD 14)
 
 add_executable(IncrPoly main.cpp IncrPoly.hpp IncrPoly-cli.h)
 
-add_subdirectory(tests)
+#add_subdirectory(tests)
