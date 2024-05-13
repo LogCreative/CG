@@ -586,15 +586,19 @@ int main()
     }
 
     /// Release resources
-    glDeleteBuffers(1, &VBO);
-    glDeleteBuffers(1, &cylinderVBO);
-    glDeleteBuffers(1, &coneVBO);
-    glDeleteBuffers(1, &sphereVBO);
     glDeleteVertexArrays(1, &cubeVAO);
     glDeleteVertexArrays(1, &lightCubeVAO);
     glDeleteVertexArrays(1, &cylinderVAO);
     glDeleteVertexArrays(1, &coneVAO);
     glDeleteVertexArrays(1, &sphereVAO);
+    glDeleteBuffers(1, &VBO);
+    glDeleteBuffers(1, &cylinderVBO);
+    glDeleteBuffers(1, &coneVBO);
+    glDeleteBuffers(1, &sphereVBO);
+    delete[] cylinderVertices;
+    delete[] coneVertices;
+    delete[] sphereVertices;
+    
     glfwTerminate();
     return 0;
 }
