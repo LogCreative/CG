@@ -9,10 +9,11 @@ in VS_OUT {
 
 uniform sampler2D floorTexture;
 
+uniform vec3 ambient;
+
 struct PointLight {
     vec3 position;
 
-    vec3 ambient;
     vec3 diffuse;
     vec3 specular;
 
@@ -26,9 +27,7 @@ uniform PointLight pointLights[NR_POINT_LIGHTS];
 
 uniform vec3 viewPos;
 
-vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir) {
-    vec3 color = texture(floorTexture, fs_in.TexCoords).rgb;
-    vec3 ambient = light.ambient * color;
+vec3 CalcPointLight(PointLight light, vec3 color, vec3 normal, vec3 fragPos, vec3 viewDir) {
 
     vec3 lightDir = normalize(light.position - fs_in.FragPos);
     float diff = max(dot(normal, lightDir), 0.0);
@@ -41,11 +40,10 @@ vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir) {
     float distance    = length(light.position - fragPos);
     float attenuation = 1.0 / (light.constant + light.linear * distance + light.quadratic * (distance * distance));
 
-    ambient  *= attenuation;
     diffuse  *= attenuation;
     specular *= attenuation;
 
-    vec3 result = ambient + diffuse + specular;
+    vec3 result = diffuse + specular;
     return result;
 }
 
@@ -54,9 +52,10 @@ void main()
     vec3 norm = normalize(fs_in.Normal);
     vec3 viewDir = normalize(viewPos - fs_in.FragPos);
 
-    vec3 result = vec3(0.0);
+    vec3 color = texture(floorTexture, fs_in.TexCoords).rgb;
+    vec3 result = ambient * color;
     for(int i = 0; i < NR_POINT_LIGHTS; i++)
-        result += CalcPointLight(pointLights[i], norm, fs_in.FragPos, viewDir);
+        result += CalcPointLight(pointLights[i], color, norm, fs_in.FragPos, viewDir);
 
     FragColor = vec4(result, 1.0);
 }
