@@ -247,7 +247,7 @@ int main()
             cylinder_radius = 1.0f;
     int nr_of_points_cylinder = 256;
     float delta_degree = 2 * PI / nr_of_points_cylinder;
-    int number_of_vertices_cylinder = (nr_of_points_cylinder + 1) * 4 + 2;
+    const int number_of_vertices_cylinder = (nr_of_points_cylinder + 1) * 4 + 2;
     float* cylinderVertices = new float[number_of_vertices_cylinder * 6];
     // top
     const int offset_top_begin = 0;
@@ -414,21 +414,23 @@ int main()
     }
     // side
     const int offset_side_sphere = offset_south_pole + (nr_of_points_sphere + 1) * 6;
+    int face_offset = 0;
     for (int i = 1; i < nr_of_stacks_sphere; i++) {
         for (int j = 0; j <= nr_of_points_sphere; j++) {
-            sphereVertices[offset_side_sphere + (i * (nr_of_points_sphere + 1) + j) * 12] = glm::cos(delta_theta * j) * glm::sin(delta_phi * i) * sphere_radius;
-            sphereVertices[offset_side_sphere + (i * (nr_of_points_sphere + 1) + j) * 12 + 1] = glm::cos(delta_phi * i) * sphere_radius;
-            sphereVertices[offset_side_sphere + (i * (nr_of_points_sphere + 1) + j) * 12 + 2] = glm::sin(delta_theta * j) * glm::sin(delta_phi * i) * sphere_radius;
-            sphereVertices[offset_side_sphere + (i * (nr_of_points_sphere + 1) + j) * 12 + 3] = glm::cos(delta_theta * j) * glm::sin(delta_phi * i);
-            sphereVertices[offset_side_sphere + (i * (nr_of_points_sphere + 1) + j) * 12 + 4] = glm::cos(delta_phi * i);
-            sphereVertices[offset_side_sphere + (i * (nr_of_points_sphere + 1) + j) * 12 + 5] = glm::sin(delta_theta * j) * glm::sin(delta_phi * i);
+            face_offset = ((i-1) * (nr_of_points_sphere + 1) + j) * 12;
+            sphereVertices[offset_side_sphere + face_offset] = glm::cos(delta_theta * j) * glm::sin(delta_phi * i) * sphere_radius;
+            sphereVertices[offset_side_sphere + face_offset + 1] = glm::cos(delta_phi * i) * sphere_radius;
+            sphereVertices[offset_side_sphere + face_offset + 2] = glm::sin(delta_theta * j) * glm::sin(delta_phi * i) * sphere_radius;
+            sphereVertices[offset_side_sphere + face_offset + 3] = glm::cos(delta_theta * j) * glm::sin(delta_phi * i);
+            sphereVertices[offset_side_sphere + face_offset + 4] = glm::cos(delta_phi * i);
+            sphereVertices[offset_side_sphere + face_offset + 5] = glm::sin(delta_theta * j) * glm::sin(delta_phi * i);
 
-            sphereVertices[offset_side_sphere + (i * (nr_of_points_sphere + 1) + j) * 12 + 6] = glm::cos(delta_theta * j) * glm::sin(delta_phi * (i + 1)) * sphere_radius;
-            sphereVertices[offset_side_sphere + (i * (nr_of_points_sphere + 1) + j) * 12 + 7] = glm::cos(delta_phi * (i + 1)) * sphere_radius;
-            sphereVertices[offset_side_sphere + (i * (nr_of_points_sphere + 1) + j) * 12 + 8] = glm::sin(delta_theta * j) * glm::sin(delta_phi * (i + 1)) * sphere_radius;
-            sphereVertices[offset_side_sphere + (i * (nr_of_points_sphere + 1) + j) * 12 + 9] = glm::cos(delta_theta * j) * glm::sin(delta_phi * (i + 1));
-            sphereVertices[offset_side_sphere + (i * (nr_of_points_sphere + 1) + j) * 12 + 10] = glm::cos(delta_phi * (i + 1));
-            sphereVertices[offset_side_sphere + (i * (nr_of_points_sphere + 1) + j) * 12 + 11] = glm::sin(delta_theta * j) * glm::sin(delta_phi * (i + 1));
+            sphereVertices[offset_side_sphere + face_offset + 6] = glm::cos(delta_theta * j) * glm::sin(delta_phi * (i + 1)) * sphere_radius;
+            sphereVertices[offset_side_sphere + face_offset + 7] = glm::cos(delta_phi * (i + 1)) * sphere_radius;
+            sphereVertices[offset_side_sphere + face_offset + 8] = glm::sin(delta_theta * j) * glm::sin(delta_phi * (i + 1)) * sphere_radius;
+            sphereVertices[offset_side_sphere + face_offset + 9] = glm::cos(delta_theta * j) * glm::sin(delta_phi * (i + 1));
+            sphereVertices[offset_side_sphere + face_offset + 10] = glm::cos(delta_phi * (i + 1));
+            sphereVertices[offset_side_sphere + face_offset + 11] = glm::sin(delta_theta * j) * glm::sin(delta_phi * (i + 1));
         }
     }
     unsigned int sphereVBO, sphereVAO;
@@ -561,7 +563,7 @@ int main()
         lightingShader.setMat4("model", sphere_model);
         glDrawArrays(GL_TRIANGLE_FAN, 0, nr_of_points_sphere + 2);
         glDrawArrays(GL_TRIANGLE_FAN, nr_of_points_sphere + 2, nr_of_points_sphere + 2);
-        glDrawArrays(GL_TRIANGLE_STRIP, (nr_of_points_sphere + 1) * 2, number_of_vertices_sphere - (nr_of_points_sphere + 1) * 2);
+        glDrawArrays(GL_TRIANGLE_STRIP, (nr_of_points_sphere + 2) * 2, (nr_of_points_sphere + 1) * (nr_of_stacks_sphere - 1) * 2);
 
         /// Light Cube rendering
         lightCubeShader.use();
@@ -584,19 +586,15 @@ int main()
     }
 
     /// Release resources
+    glDeleteBuffers(1, &VBO);
+    glDeleteBuffers(1, &cylinderVBO);
+    glDeleteBuffers(1, &coneVBO);
+    glDeleteBuffers(1, &sphereVBO);
     glDeleteVertexArrays(1, &cubeVAO);
     glDeleteVertexArrays(1, &lightCubeVAO);
     glDeleteVertexArrays(1, &cylinderVAO);
     glDeleteVertexArrays(1, &coneVAO);
     glDeleteVertexArrays(1, &sphereVAO);
-    glDeleteBuffers(1, &VBO);
-    glDeleteBuffers(1, &cylinderVBO);
-    glDeleteBuffers(1, &coneVBO);
-    glDeleteBuffers(1, &sphereVBO);
-    delete[] cylinderVertices;
-    delete[] coneVertices;
-    delete[] sphereVertices;
-
     glfwTerminate();
     return 0;
 }
