@@ -531,6 +531,7 @@ int main()
 
         /// Cylinder rendering
         glBindVertexArray(cylinderVAO);
+        lightingShader.setVec3("material.ambient",  0.0f, 0.5f, 0.5f);
         lightingShader.setVec3("material.diffuse",  0.0f, 0.5f, 0.5f);
         glm::mat4 cylinder_model = glm::mat4(1.0f);
         cylinder_model = glm::scale(cylinder_model, glm::vec3(0.5f, 2.0f, 0.5f));
@@ -542,6 +543,7 @@ int main()
 
         /// Cone rendering
         glBindVertexArray(coneVAO);
+        lightingShader.setVec3("material.ambient",  0.5f, 0.5f, 0.0f);
         lightingShader.setVec3("material.diffuse",  0.5f, 0.5f, 0.0f);
         glm::mat4 cone_model = glm::mat4(1.0f);
         cone_model = glm::scale(cone_model, glm::vec3(0.5f, 1.0f, 0.5f));
@@ -552,6 +554,7 @@ int main()
 
         /// Sphere rendering
         glBindVertexArray(sphereVAO);
+        lightingShader.setVec3("material.ambient",  0.5f, 0.0f, 0.5f);
         lightingShader.setVec3("material.diffuse",  0.5f, 0.0f, 0.5f);
         glm::mat4 sphere_model = glm::mat4(1.0f);
         sphere_model = glm::scale(sphere_model, glm::vec3(0.5f, 0.5f, 0.5f));
