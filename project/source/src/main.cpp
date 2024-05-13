@@ -11,6 +11,8 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
+#define PI 3.1415926535f
+
 int screenWidth = 800;
 int screenHeight = 600;
 
@@ -244,7 +246,7 @@ int main()
     float cylinder_height = 1.0f,
             cylinder_radius = 1.0f;
     int nr_of_points_cylinder = 256;
-    float delta_degree = 2 * M_PI / nr_of_points_cylinder;
+    float delta_degree = 2 * PI / nr_of_points_cylinder;
     int number_of_vertices_cylinder = (nr_of_points_cylinder + 1) * 4 + 2;
     float* cylinderVertices = new float[number_of_vertices_cylinder * 6];
     // top
@@ -317,7 +319,7 @@ int main()
     float cone_height = 1.0f,
             cone_radius = 1.0f;
     int nr_of_points_cone = 72;
-    float delta_degree_cone = 2 * M_PI / nr_of_points_cone;
+    float delta_degree_cone = 2 * PI / nr_of_points_cone;
     int number_of_vertices_cone = (nr_of_points_cylinder + 1) * 2 + 2;
     float* coneVertices = new float[number_of_vertices_cylinder * 6];
     // top
@@ -372,8 +374,8 @@ int main()
     float sphere_radius = 1.0f;
     int nr_of_points_sphere = 64;
     int nr_of_stacks_sphere = 64;
-    float delta_theta = 2 * M_PI / nr_of_points_sphere;
-    float delta_phi = M_PI / nr_of_stacks_sphere;
+    float delta_theta = 2 * PI / nr_of_points_sphere;
+    float delta_phi = PI / nr_of_stacks_sphere;
     int number_of_vertices_sphere = (1 + nr_of_points_sphere + 1) * 2 + (nr_of_stacks_sphere - 1) * (nr_of_points_sphere + 1) * 2;
     float* sphereVertices = new float[number_of_vertices_sphere * 6];
     // north pole
@@ -403,12 +405,12 @@ int main()
     sphereVertices[offset_south_pole_begin + 5] = 0;
     const int offset_south_pole = offset_south_pole_begin + 6;
     for (int i = 0; i <= nr_of_points_sphere; i++) {
-        sphereVertices[offset_south_pole + i * 6] = glm::cos(delta_theta * i) * glm::sin(M_PI - delta_phi) * sphere_radius;
-        sphereVertices[offset_south_pole + i * 6 + 1] = glm::cos(M_PI - delta_phi) * sphere_radius;
-        sphereVertices[offset_south_pole + i * 6 + 2] = glm::sin(delta_theta * i) * glm::sin(M_PI - delta_phi) * sphere_radius;
-        sphereVertices[offset_south_pole + i * 6 + 3] = glm::cos(delta_theta * i) * glm::sin(M_PI - delta_phi);
-        sphereVertices[offset_south_pole + i * 6 + 4] = glm::cos(M_PI - delta_phi);
-        sphereVertices[offset_south_pole + i * 6 + 5] = glm::sin(delta_theta * i) * glm::sin(M_PI - delta_phi);
+        sphereVertices[offset_south_pole + i * 6] = glm::cos(delta_theta * i) * glm::sin(PI - delta_phi) * sphere_radius;
+        sphereVertices[offset_south_pole + i * 6 + 1] = glm::cos(PI - delta_phi) * sphere_radius;
+        sphereVertices[offset_south_pole + i * 6 + 2] = glm::sin(delta_theta * i) * glm::sin(PI - delta_phi) * sphere_radius;
+        sphereVertices[offset_south_pole + i * 6 + 3] = glm::cos(delta_theta * i) * glm::sin(PI - delta_phi);
+        sphereVertices[offset_south_pole + i * 6 + 4] = glm::cos(PI - delta_phi);
+        sphereVertices[offset_south_pole + i * 6 + 5] = glm::sin(delta_theta * i) * glm::sin(PI - delta_phi);
     }
     // side
     const int offset_side_sphere = offset_south_pole + (nr_of_points_sphere + 1) * 6;
