@@ -479,7 +479,6 @@ int main()
         planeShader.setVec3("viewPos", camera.Position);
         planeShader.setVec3("ambient", 0.1f, 0.1f, 0.1f);
         planeShader.setVec3("pointLights[0].position", pointLightPositions[0]);
-//        planeShader.setVec3("pointLights[0].ambient", 0.05f, 0.05f, 0.05f);
         planeShader.setVec3("pointLights[0].diffuse", 0.8f, 0.8f, 0.8f);
         planeShader.setVec3("pointLights[0].specular", 1.0f, 1.0f, 1.0f);
         planeShader.setFloat("pointLights[0].constant", 1.0f);
@@ -487,7 +486,6 @@ int main()
         planeShader.setFloat("pointLights[0].quadratic", 0.032f);
 
         planeShader.setVec3("pointLights[1].position", pointLightPositions[1]);
-//        planeShader.setVec3("pointLights[1].ambient", 0.05f, 0.05f, 0.05f);
         planeShader.setVec3("pointLights[1].diffuse", 0.8f, 0.8f, 0.8f);
         planeShader.setVec3("pointLights[1].specular", 1.0f, 1.0f, 1.0f);
         planeShader.setFloat("pointLights[1].constant", 1.0f);
@@ -509,7 +507,6 @@ int main()
 
         lightingShader.setVec3("ambient", 0.1f, 0.1f, 0.1f);
         lightingShader.setVec3("pointLights[0].position", pointLightPositions[0]);
-//        lightingShader.setVec3("pointLights[0].ambient", 0.05f, 0.05f, 0.05f);
         lightingShader.setVec3("pointLights[0].diffuse", 0.8f, 0.8f, 0.8f);
         lightingShader.setVec3("pointLights[0].specular", 1.0f, 1.0f, 1.0f);
         lightingShader.setFloat("pointLights[0].constant", 1.0f);
@@ -517,7 +514,6 @@ int main()
         lightingShader.setFloat("pointLights[0].quadratic", 0.032f);
 
         lightingShader.setVec3("pointLights[1].position", pointLightPositions[1]);
-//        lightingShader.setVec3("pointLights[1].ambient", 0.05f, 0.05f, 0.05f);
         lightingShader.setVec3("pointLights[1].diffuse", 0.8f, 0.8f, 0.8f);
         lightingShader.setVec3("pointLights[1].specular", 1.0f, 1.0f, 1.0f);
         lightingShader.setFloat("pointLights[1].constant", 1.0f);
