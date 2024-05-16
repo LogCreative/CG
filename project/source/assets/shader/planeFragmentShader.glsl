@@ -33,8 +33,14 @@ vec3 CalcPointLight(PointLight light, vec3 color, vec3 normal, vec3 fragPos, vec
     float diff = max(dot(normal, lightDir), 0.0);
     vec3 diffuse = light.diffuse * (diff * color);
 
+    // Phong
     vec3 reflectDir = reflect(-lightDir, normal);
     float spec = pow(max(dot(viewDir, reflectDir), 0.0), 8.0); // assume shinesss is 8.0
+
+    // Blinn-Phong
+//    vec3 halfwayDir = normalize(lightDir + viewDir);
+//    float spec = pow(max(dot(normal, halfwayDir), 0.0), 8.0);
+
     vec3 specular = light.specular * spec * vec3(0.3); // assuming bright white light color
 
     float distance    = length(light.position - fragPos);
